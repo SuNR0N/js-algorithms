@@ -4,7 +4,7 @@
   "description": "JavaScript Algorithms",
   "main": "index.js",
   "scripts": {
-    "build": "babel src -d lib",
+    "build": "babel src -d lib --ignore 'src/**/*.spec.js'",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "test": "jest"
