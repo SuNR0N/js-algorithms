@@ -7,3 +7,5 @@
     - [Iterative Power](./src/01-algorithms-and-their-complexities/iterative-power.js)
     - [Factorial](./src/01-algorithms-and-their-complexities/factorial.js)
     - [Pairs](./src/01-algorithms-and-their-complexities/pairs.js)
+    - [Multiply Array in Place](./src/01-algorithms-and-their-complexities/multiply-array-in-place.js)
+    - [Multiply Array](./src/01-algorithms-and-their-complexities/multiply-array.js)
