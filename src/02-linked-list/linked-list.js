@@ -171,11 +171,12 @@ export class LinkedList {
      * 
      * Time Complexity: O(n)
      * 
-     * @param {any} value 
-     * @param {function} callback 
+     * @param {Object} query 
+     * @param {number?} [query.value]
+     * @param {function?} [query.callback]
      * @return {LinkedListNode}
      */
-    find(value, callback) {
+    find({ value, callback } = {}) {
         if (!this.head) {
             return null;
         }
