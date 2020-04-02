@@ -1,13 +1,7 @@
 import { LinkedListNode } from './linked-list-node';
 
 export class LinkedList {
-    /**
-     * Create a LinkedList with the provided ordered values
-     * 
-     * @param  {...any} values 
-     * @return {LinkedList}
-     */
-    static build(...values) {
+    constructor(...values) {
         const nodes = values
             .reduceRight((acc, value) => {
                 const nextIndex = acc.length - 1;
@@ -17,19 +11,8 @@ export class LinkedList {
                 return acc;
             }, []);
 
-        const linkedList = new LinkedList();
-        linkedList.tail = nodes[0];
-        linkedList.head = nodes[nodes.length - 1];
-
-        return linkedList;
-    }
-
-    constructor() {
-        /** @var LinkedListNode */
-        this.head = null;
-
-        /** @var LinkedListNode */
-        this.tail = null;
+        this.head = nodes[nodes.length - 1];
+        this.tail = nodes[0];
     }
 
     /**

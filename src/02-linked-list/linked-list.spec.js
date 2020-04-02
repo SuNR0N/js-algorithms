@@ -1,37 +1,35 @@
 import { LinkedList } from './linked-list';
 import { LinkedListNode } from './linked-list-node';
 
-describe('build', () => {
-    it('should build a linked list based on the provided values', () => {
-        const list = LinkedList.build(1, 2, 3);
-        
-        expect(list.toArray().every((item) => item instanceof LinkedListNode)).toBe(true);
-        expect(list.toArray()).toEqual([
-            expect.objectContaining({
+describe('constructor', () => {
+    describe('given its called without argument', () => {
+        const list = new LinkedList();
+
+        it('should initialise the list with its head as null', () => {
+            expect(list.head).toBeUndefined();
+        });
+    
+        it('should initialise the list with its tail as null', () => {
+            expect(list.tail).toBeUndefined();
+        });
+    });
+
+    describe('given its called with arguments', () => {
+        const list = new LinkedList(1, 2, 3);
+
+        it('should initialise the list with the provided head', () => {
+            expect(list.head).toEqual(expect.objectContaining({
                 value: 1,
                 next: expect.objectContaining({ value: 2 })
-            }),
-            expect.objectContaining({
-                value: 2,
-                next: expect.objectContaining({ value: 3 })
-            }),
-            expect.objectContaining({
+            }));
+        });
+    
+        it('should initialise the list with the provided tail', () => {
+            expect(list.tail).toEqual(expect.objectContaining({
                 value: 3,
                 next: null
-            })
-        ]);
-    });
-});
-
-describe('constructor', () => {
-    const list = new LinkedList();
-
-    it('should initialise the list with its head as null', () => {
-        expect(list.head).toBeNull();
-    });
-
-    it('should initialise the list with its tail as null', () => {
-        expect(list.tail).toBeNull();
+            }));
+        });
     });
 });
 
@@ -46,7 +44,7 @@ describe('prepend', () => {
     });
 
     it('should only set the new node as the list head if it is not empty', () => {
-        const list = LinkedList.build(1);
+        const list = new LinkedList(1);
         list.prepend(3);
 
         expect(list.head).toBeInstanceOf(LinkedListNode);
@@ -66,7 +64,7 @@ describe('append', () => {
     });
 
     it('should only set the new node as the list tail if it is not empty', () => {
-        const list = LinkedList.build(1);
+        const list = new LinkedList(1);
         list.append(3);
 
         expect(list.tail).toBeInstanceOf(LinkedListNode);
@@ -85,7 +83,7 @@ describe('delete', () => {
     });
 
     it('should remove the head if its value is specified and it is the only node', () => {
-        const list = LinkedList.build(1);
+        const list = new LinkedList(1);
         const deletedNode = list.delete(1);
 
         expect(deletedNode.value).toBe(1);
@@ -93,14 +91,14 @@ describe('delete', () => {
     });
 
     it('should return null if a node with the provided value does not exist', () => {
-        const list = LinkedList.build(1, 2, 3);
+        const list = new LinkedList(1, 2, 3);
         const deletedNode = list.delete(4);
 
         expect(deletedNode).toBeNull();
     });
 
     it('should remove the node with the provided value if it exists', () => {
-        const list = LinkedList.build(1, 2, 3);
+        const list = new LinkedList(1, 2, 3);
         const deletedNode = list.delete(2);
 
         expect(deletedNode.value).toBe(2);
@@ -108,7 +106,7 @@ describe('delete', () => {
     });
 
     it('should remove all nodes with the provided value if they exist', () => {
-        const list = LinkedList.build(1, 2, 1, 3, 1);
+        const list = new LinkedList(1, 2, 1, 3, 1);
         const deletedNode = list.delete(1);
 
         expect(deletedNode.value).toBe(1);
@@ -118,7 +116,7 @@ describe('delete', () => {
 
 describe('deleteTail', () => {
     it('should delete the tail if there is only one node in the list', () => {
-        const list = LinkedList.build(1);
+        const list = new LinkedList(1);
 
         const deletedTail = list.deleteTail();
 
@@ -128,7 +126,7 @@ describe('deleteTail', () => {
     });
 
     it('should delete the tail if there are multiple nodes in the list', () => {
-        const list = LinkedList.build(1, 2, 3);
+        const list = new LinkedList(1, 2, 3);
 
         const deletedTail = list.deleteTail();
 
@@ -147,7 +145,7 @@ describe('deleteHead', () => {
     });
 
     it('should delete the head in case if there is a single node in the list', () => {
-        const list = LinkedList.build(1);
+        const list = new LinkedList(1);
 
         const deletedHead = list.deleteHead();
 
@@ -157,7 +155,7 @@ describe('deleteHead', () => {
     });
 
     it('should delete the head in case if there are multiple nodes in the list', () => {
-        const list = LinkedList.build(1, 2, 3);
+        const list = new LinkedList(1, 2, 3);
 
         const deletedHead = list.deleteHead();
 
@@ -169,7 +167,7 @@ describe('deleteHead', () => {
 
 describe('find', () => {
     it('should return null if called without argument', () => {
-        const list = LinkedList.build(1, 2, 3);
+        const list = new LinkedList(1, 2, 3);
 
         const node = list.find();
 
@@ -186,7 +184,7 @@ describe('find', () => {
         });
     
         it('should return the node if it can be found', () => {
-            const list = LinkedList.build(1, 2, 3);
+            const list = new LinkedList(1, 2, 3);
     
             const node = list.find({ value: 2 });
     
@@ -194,7 +192,7 @@ describe('find', () => {
         });
     
         it('should return the first node if multiple can be found with the same value', () => {
-            const list = LinkedList.build(1, 2, 1, 3, 1);
+            const list = new LinkedList(1, 2, 1, 3, 1);
     
             const node = list.find({ value: 1 });
     
@@ -207,7 +205,7 @@ describe('find', () => {
         });
     
         it('should return null if no node can be found with the provided value', () => {
-            const list = LinkedList.build(1, 2);
+            const list = new LinkedList(1, 2);
     
             const node = list.find({ value: 3 });
     
@@ -217,7 +215,7 @@ describe('find', () => {
 
     describe('by callback', () => {
         it('should return the first node which fulfils the condition provided in the callback', () => {
-            const list = LinkedList.build(1, 2, 3);
+            const list = new LinkedList(1, 2, 3);
     
             const node = list.find({ callback: (value) => value > 2 });
 
@@ -225,7 +223,7 @@ describe('find', () => {
         });
 
         it('should return null if no node can be found which would fulfil the condition provided in the callback', () => {
-            const list = LinkedList.build(1, 2, 3);
+            const list = new LinkedList(1, 2, 3);
     
             const node = list.find({ callback: (value) => value > 3 });
 
@@ -236,7 +234,7 @@ describe('find', () => {
 
 describe('toArray', () => {
     it('should convert the list to an array', () => {
-        const list = LinkedList.build(1, 2, 3);
+        const list = new LinkedList(1, 2, 3);
 
         const arr = list.toArray();
 
@@ -258,7 +256,7 @@ describe('toArray', () => {
 });
 
 describe('toString', () => {
-    const list = LinkedList.build(1, 2, 3);
+    const list = new LinkedList(1, 2, 3);
 
     describe('given a callback is provided', () => {
         it('should stringify its nodes using the provided callback function', () => {

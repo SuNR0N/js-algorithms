@@ -12,3 +12,5 @@
 - Chapter 02 - Linked List
     - [LinkedListNode](./src/02-linked-list/linked-list-node.js)
     - [LinkedList](./src/02-linked-list/linked-list.js)
+- Chapter 03 - Queue
+    - [Queue](./src/03-queue/queue.js)
