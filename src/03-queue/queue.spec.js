@@ -10,6 +10,9 @@ describe('constructor', () => {
 
     it('should create a queue with values when called with arguments', () => {
         const queue = new Queue(1, 2, 3);
+
+        expect(queue.linkedList.head.value).toBe(1);
+        expect(queue.linkedList.tail.value).toBe(3);
     });
 });
 
